@@ -51,7 +51,7 @@ def basic_calc():
 
 #________AREA CALCULATOR_________
 def area_calc():
-    return 0
+    return 0 #Do the area calculator part
 
 def volume_calc():
     def destruction():          #To clear the basic, area and unit buttons
