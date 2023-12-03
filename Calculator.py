@@ -59,16 +59,34 @@ def unit_calc():
         kgs_pounds.destroy()
     def feet():
         destruction()
+        Label(calc,text="Enter Value in feet").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     def metres():
         destruction()
+        Label(calc,text="Enter Value in metres").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     def acres():
         destruction()
+        Label(calc,text="Enter Value in acres").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     def km2():
         destruction()
+        Label(calc,text="Enter Value in square kilometres").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     def pounds():
         destruction()
+        Label(calc,text="Enter Value in pounds").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     def kgs():
         destruction()
+        Label(calc,text="Enter Value in kgs").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
     feet_metres =  Button(calc, text="Feet to Metres", activebackground=peach, bg=black, borderwidth=2, command=feet, font=("Helvatica", 16), activeforeground=matte_blue)
     feet_metres.place(x=150, y=100, width=250, height=50)
     metres_feet =  Button(calc, text="Metres to Feet", activebackground=peach, bg=black, borderwidth=2, command=metres, font=("Helvatica", 16), activeforeground=matte_blue)
