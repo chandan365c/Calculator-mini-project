@@ -61,6 +61,25 @@ def volume_calc():
         cylinder_button.destroy()
     def cuboid():
         destruction()
+        Label(calc,text="Enter Value of length").grid(row=0)
+        Label(calc,text="Enter Value of breadth").grid(row=1)
+        Label(calc,text="Enter Value of height").grid(row=2)
+        g=Entry(calc)
+        h=Entry(calc)
+        i=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        i.grid(row=2,column=1)
+        def calc1():
+            ganj.destroy()
+            j=g.get()
+            k=h.get()
+            l=i.get()
+            m=float(j)*float(k)*float(l)
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=3,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=3, column=1)
     def cone():
         destruction()
     def sphere():
