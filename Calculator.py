@@ -82,10 +82,54 @@ def volume_calc():
         ganj.grid(row=3, column=1)
     def cone():
         destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        Label(calc,text="Enter Value of height").grid(row=1)
+        g=Entry(calc)
+        h=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            k=h.get()
+            m=pi*float(j)**2*float(k)/3
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=2,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=2, column=1)
     def sphere():
         destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            m=4/3*pi*float(j)**3
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=1,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=1, column=1)
     def cylinder():
         destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        Label(calc,text="Enter Value of height").grid(row=1)
+        g=Entry(calc)
+        h=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            k=h.get()
+            m=pi*float(j)**2*float(k)
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=2,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=2, column=1)
     cuboid_button =  Button(calc, text="Cuboid", activebackground=peach, bg=black, borderwidth=2, command=cuboid, font=("Helvatica", 32), activeforeground=matte_blue)
     cuboid_button.place(x=100, y=100, width=350, height=100)
     cone_button =  Button(calc, text="Cone", activebackground=peach, bg=black, borderwidth=2, command=cone, font=("Helvatica", 32), activeforeground=matte_blue)
