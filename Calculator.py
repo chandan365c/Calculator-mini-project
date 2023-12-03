@@ -50,7 +50,37 @@ def area_calc():
 
 #_________UNIT CONVERTER_________
 def unit_calc():
-    return 0 
+    def destruction():          #To clear the basic, area and unit buttons
+        feet_metres.destroy()
+        metres_feet.destroy()
+        acres_km2.destroy()
+        km2_acres.destroy()
+        pounds_kgs.destroy()
+        kgs_pounds.destroy()
+    def feet():
+        destruction()
+    def metres():
+        destruction()
+    def acres():
+        destruction()
+    def km2():
+        destruction()
+    def pounds():
+        destruction()
+    def kgs():
+        destruction()
+    feet_metres =  Button(calc, text="Feet to Metres", activebackground=peach, bg=black, borderwidth=2, command=feet, font=("Helvatica", 16), activeforeground=matte_blue)
+    feet_metres.place(x=150, y=100, width=250, height=50)
+    metres_feet =  Button(calc, text="Metres to Feet", activebackground=peach, bg=black, borderwidth=2, command=metres, font=("Helvatica", 16), activeforeground=matte_blue)
+    metres_feet.place(x=150, y=200, width=250, height=50)
+    acres_km2 = Button(calc, text="Acres to Sq. Kilometre", activebackground=peach, bg=black, borderwidth=2, command=acres, font=("Helvatica", 16), activeforeground=matte_blue)
+    acres_km2.place(x=150,y=300, width=250, height=50)
+    km2_acres =  Button(calc, text="Sq. Kilometres to Acres", activebackground=peach, bg=black, borderwidth=2, command=km2, font=("Helvatica", 16), activeforeground=matte_blue)
+    km2_acres.place(x=150, y=400, width=250, height=50)
+    pounds_kgs =  Button(calc, text="Pounds to Kgs", activebackground=peach, bg=black, borderwidth=2, command=pounds, font=("Helvatica", 16), activeforeground=matte_blue)
+    pounds_kgs.place(x=150, y=500, width=250, height=50)
+    kgs_pounds = Button(calc, text="Kgs to pounds", activebackground=peach, bg=black, borderwidth=2, command=kgs, font=("Helvatica", 16), activeforeground=matte_blue)
+    kgs_pounds.place(x=150,y=600, width=250, height=50)
 
 options_screen()
 calc.mainloop()
