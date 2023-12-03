@@ -54,7 +54,27 @@ def area_calc():
     return 0
 
 def volume_calc():
-    return 0
+    def destruction():          #To clear the basic, area and unit buttons
+        cuboid_button.destroy()
+        cone_button.destroy()
+        sphere_button.destroy()
+        cylinder_button.destroy()
+    def cuboid():
+        destruction()
+    def cone():
+        destruction()
+    def sphere():
+        destruction()
+    def cylinder():
+        destruction()
+    cuboid_button =  Button(calc, text="Cuboid", activebackground=peach, bg=black, borderwidth=2, command=cuboid, font=("Helvatica", 32), activeforeground=matte_blue)
+    cuboid_button.place(x=100, y=100, width=350, height=100)
+    cone_button =  Button(calc, text="Cone", activebackground=peach, bg=black, borderwidth=2, command=cone, font=("Helvatica", 32), activeforeground=matte_blue)
+    cone_button.place(x=100, y=250, width=350, height=100)
+    sphere_button =  Button(calc, text="Sphere", activebackground=peach, bg=black, borderwidth=2, command=sphere, font=("Helvatica", 32), activeforeground=matte_blue)
+    sphere_button.place(x=100, y=400, width=350, height=100)
+    cylinder_button = Button(calc, text="Cylinder", activebackground=peach, bg=black, borderwidth=2, command=cylinder, font=("Helvatica", 32), activeforeground=matte_blue)
+    cylinder_button.place(x=100,y=550, width=350, height=100) 
 
 #_________UNIT CONVERTER_________
 def unit_calc():
