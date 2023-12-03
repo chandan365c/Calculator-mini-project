@@ -14,6 +14,7 @@ def options_screen():
         basic_button.destroy()
         area_button.destroy()
         unit_con_button.destroy()
+        volume_button.destroy()
 
     def basic_end():    #Destroy Basic button and open basic calculator
         destruction()
@@ -24,14 +25,19 @@ def options_screen():
     def unit_end():     #Destroy Unit button and give unit converter
         destruction()
         unit_calc()
+    def vol_end():
+        destruction()
+        volume_calc()
 
     #__________Basic, Area, Unit Buttons_________________
     basic_button =  Button(calc, text="Basic calculator", activebackground=peach, bg=black, borderwidth=2, command=basic_end, font=("Helvatica", 32), activeforeground=matte_blue)
-    basic_button.place(x=100, y=76, width=350, height=100)
+    basic_button.place(x=100, y=100, width=350, height=100)
     area_button =  Button(calc, text="Area calculator", activebackground=peach, bg=black, borderwidth=2, command=area_end, font=("Helvatica", 32), activeforeground=matte_blue)
-    area_button.place(x=100, y=269, width=350, height=100)
+    area_button.place(x=100, y=250, width=350, height=100)
+    volume_button =  Button(calc, text="Volume calculator", activebackground=peach, bg=black, borderwidth=2, command=vol_end, font=("Helvatica", 32), activeforeground=matte_blue)
+    volume_button.place(x=100, y=400, width=350, height=100)
     unit_con_button = Button(calc, text="Unit Converter", activebackground=peach, bg=black, borderwidth=2, command=unit_end, font=("Helvatica", 32), activeforeground=matte_blue)
-    unit_con_button.place(x=100,y=462, width=350, height=100) 
+    unit_con_button.place(x=100,y=550, width=350, height=100) 
 
 
 #_______BASIC CALCULATOR_________
@@ -47,6 +53,91 @@ def basic_calc():
 def area_calc():
     return 0
 
+def volume_calc():
+    def destruction():          #To clear the basic, area and unit buttons
+        cuboid_button.destroy()
+        cone_button.destroy()
+        sphere_button.destroy()
+        cylinder_button.destroy()
+    def cuboid():
+        destruction()
+        Label(calc,text="Enter Value of length").grid(row=0)
+        Label(calc,text="Enter Value of breadth").grid(row=1)
+        Label(calc,text="Enter Value of height").grid(row=2)
+        g=Entry(calc)
+        h=Entry(calc)
+        i=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        i.grid(row=2,column=1)
+        def calc1():
+            ganj.destroy()
+            j=g.get()
+            k=h.get()
+            l=i.get()
+            m=float(j)*float(k)*float(l)
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=3,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=3, column=1)
+    def cone():
+        destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        Label(calc,text="Enter Value of height").grid(row=1)
+        g=Entry(calc)
+        h=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            k=h.get()
+            m=pi*float(j)**2*float(k)/3
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=2,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=2, column=1)
+    def sphere():
+        destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        g=Entry(calc)
+        g.grid(row=0,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            m=4/3*pi*float(j)**3
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=1,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=1, column=1)
+    def cylinder():
+        destruction()
+        Label(calc,text="Enter Value of radius").grid(row=0)
+        Label(calc,text="Enter Value of height").grid(row=1)
+        g=Entry(calc)
+        h=Entry(calc)
+        g.grid(row=0,column=1)
+        h.grid(row=1,column=1)
+        def calc1():
+            ganj.destroy()
+            pi=3.14
+            j=g.get()
+            k=h.get()
+            m=pi*float(j)**2*float(k)
+            z=Label(calc,text=f"{m} cubic units ")
+            z.grid(row=2,column=1)
+        ganj=Button(calc, text="Calculate", command=calc1)
+        ganj.grid(row=2, column=1)
+    cuboid_button =  Button(calc, text="Cuboid", activebackground=peach, bg=black, borderwidth=2, command=cuboid, font=("Helvatica", 32), activeforeground=matte_blue)
+    cuboid_button.place(x=100, y=100, width=350, height=100)
+    cone_button =  Button(calc, text="Cone", activebackground=peach, bg=black, borderwidth=2, command=cone, font=("Helvatica", 32), activeforeground=matte_blue)
+    cone_button.place(x=100, y=250, width=350, height=100)
+    sphere_button =  Button(calc, text="Sphere", activebackground=peach, bg=black, borderwidth=2, command=sphere, font=("Helvatica", 32), activeforeground=matte_blue)
+    sphere_button.place(x=100, y=400, width=350, height=100)
+    cylinder_button = Button(calc, text="Cylinder", activebackground=peach, bg=black, borderwidth=2, command=cylinder, font=("Helvatica", 32), activeforeground=matte_blue)
+    cylinder_button.place(x=100,y=550, width=350, height=100) 
 
 #_________UNIT CONVERTER_________
 def unit_calc():
