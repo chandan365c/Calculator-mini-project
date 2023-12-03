@@ -62,31 +62,79 @@ def unit_calc():
         Label(calc,text="Enter Value in feet").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert1():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)/3.281
+            l=Label(calc,text=f"{k} metres ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert1)
+        ganj.grid(row=2, column=1)
     def metres():
         destruction()
         Label(calc,text="Enter Value in metres").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert2():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)*3.281
+            l=Label(calc,text=f"{k} feet ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert2)
+        ganj.grid(row=2, column=1)
     def acres():
         destruction()
         Label(calc,text="Enter Value in acres").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert3():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)/247.1
+            l=Label(calc,text=f"{k} Sq. Kilometres ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert3)
+        ganj.grid(row=2, column=1)
     def km2():
         destruction()
         Label(calc,text="Enter Value in square kilometres").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert4():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)*247.1
+            l=Label(calc,text=f"{k} acres ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert4)
+        ganj.grid(row=2, column=1)
     def pounds():
         destruction()
         Label(calc,text="Enter Value in pounds").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert5():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)/2.205
+            l=Label(calc,text=f"{k} Kgs ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert5)
+        ganj.grid(row=2, column=1)
     def kgs():
         destruction()
         Label(calc,text="Enter Value in kgs").grid(row=0)
         g=Entry(calc)
         g.grid(row=0,column=1)
+        def convert6():
+            ganj.destroy()
+            h=g.get()
+            k=float(h)*2.205
+            l=Label(calc,text=f"{k} Pounds ")
+            l.grid(row=1,column=0)
+        ganj=Button(calc, text="Convert", command=convert6)
+        ganj.grid(row=2, column=1)
     feet_metres =  Button(calc, text="Feet to Metres", activebackground=peach, bg=black, borderwidth=2, command=feet, font=("Helvatica", 16), activeforeground=matte_blue)
     feet_metres.place(x=150, y=100, width=250, height=50)
     metres_feet =  Button(calc, text="Metres to Feet", activebackground=peach, bg=black, borderwidth=2, command=metres, font=("Helvatica", 16), activeforeground=matte_blue)
