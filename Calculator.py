@@ -1,7 +1,7 @@
 # Calculator-mini-project
 import tkinter
 from tkinter import *
-calc = Tk()
+calc = tkinter.Tk()
 calc.title("Calculator")
 calc.geometry('550x700')
 calc["background"] = "#323338"
@@ -45,12 +45,12 @@ def basic_calc():
 
 #________AREA CALCULATOR_________
 def area_calc():
-    dropdown
+    return 0
 
 
 #_________UNIT CONVERTER_________
 def unit_calc():
-    entry 
+    return 0 
 
 options_screen()
 calc.mainloop()
