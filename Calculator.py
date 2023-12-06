@@ -6,6 +6,8 @@ calc = Tk()
 calc.title("Calculator")
 calc.geometry('550x700')
 calc["background"] = "#323338"
+
+#____COLOURS_____
 black = "#323338"
 peach = "#E8C898"
 matte_blue = "#275C8D"
@@ -13,11 +15,16 @@ cool_white = "#CBD9ED"
 space_grey = "#888888"
 grey = "#555555"
 matte_green = "#93B488"
-matte_red = "#905959"
+matte_red = "#AC4545"
+matte_orange = "#B16C39"
+text_colour = "#D18845"
 
 
-def back():
+#____EXIT BUTTON_____
+def exit():
     calc.destroy()
+
+
 
 
 #_____________MAIN SCREEN________________
@@ -27,6 +34,7 @@ def options_screen():
         area_button.destroy()
         unit_con_button.destroy()
         volume_button.destroy()
+        exit_button_Op.destroy()
 
     def basic_end():    #Destroy Basic button and open basic calculator
         destruction()
@@ -48,11 +56,16 @@ def options_screen():
     area_button =  Button(calc, text="Area calculator", activebackground=matte_green, bg=grey, borderwidth=2, bd=4, command=area_end, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white") 
     area_button.place(x=100, y=211, width=350, height=100)
 
-    volume_button =  Button(calc, text="Volume calculator", activebackground=matte_green, bg=grey, borderwidth=2, command=vol_end, font=("Helvatica 20 bold"), activeforeground=matte_blue, foreground="white")
+    volume_button =  Button(calc, text="Volume calculator", activebackground=matte_green, bg=grey, borderwidth=2, bd=4, command=vol_end, font=("Helvatica 20 bold"), activeforeground=matte_blue, foreground="white")
     volume_button.place(x=100, y=363, width=350, height=100)
 
     unit_con_button = Button(calc, text="Unit Converter", activebackground=matte_green, bg=grey, borderwidth=2, bd=4, command=unit_end, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white")
     unit_con_button.place(x=100,y=515, width=350, height=100) 
+
+    exit_button_Op = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+    exit_button_Op.place(x=475, y=655, height=40, width=60)
+
+    calc.geometry("550x700")
 
 
 #_______BASIC CALCULATOR_________
@@ -88,19 +101,41 @@ def basic_calc():
         
     row_val = 2
     col_val = 3
-
+    back_numbers = []
     for button_text in numbers:
-        Button(calc, text=button_text, width=7, height=4, command=lambda text=button_text: on_click(text), bd=5, bg=grey, activebackground=space_grey, foreground='white', activeforeground=peach, font=("Arial 11 bold"), justify='right').grid(row=row_val, column=col_val, padx=3, pady=3, sticky=tk.S)
+        basic_buttons = Button(calc, text=button_text, width=7, height=4, command=lambda text=button_text: on_click(text), bd=5, bg=grey, activebackground=space_grey, foreground='white', activeforeground=peach, font=("Arial 13 bold"), justify='right')
+        basic_buttons.grid(row=row_val, column=col_val, padx=3, pady=3, sticky=tk.S)
         col_val += 1
         if col_val > 6:
             col_val = 3
             row_val += 1
+        back_numbers.append(basic_buttons)
 
     #_____EXIT BUTTON______
-    back_button = Button(calc, text="EXIT", command=back, bg=matte_red, foreground="white", bd=4, activebackground="red")
-    back_button.place(x=350, y=600, height=40, width=60)
+    exit_button_b_clc = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+    exit_button_b_clc.place(x=400, y=655, height=40, width=60)
 
-    calc.geometry("450x650")
+    
+    #_______BACK BUTTON TO OPTIONS SCREEN_______
+    def back_b_clc():
+        result_entry.destroy()
+        exit_button_b_clc.destroy()
+        for i in back_numbers:
+            i.destroy()
+        back_button_b_clc.destroy()
+        options_screen()
+
+    #_____BACK BUTTON_______
+    global back_button_b_clc
+    back_button_b_clc = Button(calc, text="BACK", command=back_b_clc, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+    back_button_b_clc.place(x=300, y=655, height=40, width=60)
+    
+
+    calc.geometry("500x700")
+
+
+
+
 
 
 
@@ -110,7 +145,7 @@ def area_calc():
     def dropdown():
         # Create and place a label for shape selection
         global shape_label
-        shape_label = tk.Label(calc, text="Select Shape:")
+        shape_label = tk.Label(calc, text="Select Shape:", bg=black, foreground=text_colour, font=("Arial 12 bold"))
         shape_label.place(x=32, y=138, height=42, width=112)
 
         # Create a dropdown menu for shape selection
@@ -124,12 +159,28 @@ def area_calc():
 
         # OK Button
         global ok_button
-        ok_button = Button(calc, text="OK", command=OK_button, bg=matte_green, activebackground="green", bd=4)
+        ok_button = Button(calc, text="OK", command=OK_button, bg=matte_green, foreground="white", activebackground="green", bd=4)
         ok_button.place(x=459, y=199, height=37, width=60)
 
         #_____EXIT BUTTON______
-        back_button = Button(calc, text="EXIT", command=back, bg=matte_red, foreground="white", bd=4, activebackground="red")
-        back_button.place(x=455, y=318, height=27, width=87)
+        global exit_button_A
+        exit_button_A = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_A.place(x=455, y=318, height=27, width=87)
+
+        #_____BACK BUTTON_______
+        global back_button_ar_sc
+        back_button_ar_sc = Button(calc, text="BACK", command=back_Op_A, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_ar_sc.place(x=100, y=318, height=27, width=87)
+
+    #_______BACK BUTTON TO OPTIONS SCREEN_______
+    def back_Op_A():
+        shape_label.destroy()
+        shape_menu.destroy()
+        ok_button.destroy()
+        back_button_ar_sc.destroy()
+        exit_button_A.destroy()
+        calc.geometry("550x700")
+        options_screen()
 
 
     #________OK BUTTON____________
@@ -141,18 +192,24 @@ def area_calc():
             shape_menu.destroy()
             shape_label.destroy()
             ok_button.destroy()
+            back_button_ar_sc.destroy()
+            exit_button_A.destroy()
             circle()
             
         elif shape == "Rectangle":
             shape_menu.destroy()
             shape_label.destroy()
             ok_button.destroy()
+            back_button_ar_sc.destroy()
+            exit_button_A.destroy()
             rectangle()
             
         elif shape == "Triangle":
             shape_menu.destroy()
             shape_label.destroy()
             ok_button.destroy()
+            back_button_ar_sc.destroy()
+            exit_button_A.destroy()
             triangle()
         else:
             area = 0  # Default value for unknown shape
@@ -169,7 +226,7 @@ def area_calc():
         Radius_textbox.place(x=170, y=100)
 
         #________CALCULATE BUTTON_______ 
-        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: C_Calculate(Radius_textbox.get()), activebackground="green", bd=3)
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: C_Calculate(Radius_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
         Calculate_button.place(x=100, y=150)
 
         #___________Calculate Function__________
@@ -180,8 +237,24 @@ def area_calc():
                 ShowResult(result)   
 
         #_____EXIT BUTTON______
-        back_button = Button(calc, text="EXIT", command=back, bg=matte_red, foreground="white", bd=4, activebackground="red")
-        back_button.place(x=455, y=318, height=27, width=87)
+        exit_button_Cr = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Cr.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Cr():
+            Radius_label.destroy()
+            Radius_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Cr.destroy()
+            exit_button_Cr.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Cr
+        back_button_Cr = Button(calc, text="BACK", command=back_Cr, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Cr.place(x=100, y=318, height=27, width=87)
+
 
         
 
@@ -202,7 +275,7 @@ def area_calc():
         Width_textbox.place(x=170, y=150)
 
         #________CALCULATE BUTTON_______
-        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: R_Calculate(Length_textbox.get(), Width_textbox.get()), activebackground="green", bd=3)
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: R_Calculate(Length_textbox.get(), Width_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
         Calculate_button.place(x=100, y=200)
 
         #___________Calculate Function_______________
@@ -214,8 +287,26 @@ def area_calc():
                 ShowResult(result)   
 
         #_____EXIT BUTTON______
-        back_button = Button(calc, text="EXIT", command=back, bg=matte_red, foreground="white", bd=4, activebackground="red")
-        back_button.place(x=455, y=318, height=27, width=87)
+        exit_button_R = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_R.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_R():
+            Length_label.destroy()
+            Length_textbox.destroy()
+            Width_label.destroy()
+            Width_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_R.destroy()
+            exit_button_R.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_R
+        back_button_R = Button(calc, text="BACK", command=back_R, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_R.place(x=100, y=318, height=27, width=87)
+
 
 
     #________TRIANGLE________
@@ -235,11 +326,11 @@ def area_calc():
         Height_textbox.place(x=170, y=150)
 
         #________CALCULATE BUTTON_______
-        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: R_Calculate(Base_textbox.get(), Height_textbox.get()), activebackground="green", bd=3)
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: T_Calculate(Base_textbox.get(), Height_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
         Calculate_button.place(x=100, y=200)
 
         #___________Calculate Function_______________
-        def R_Calculate(B,H):
+        def T_Calculate(B,H):
             Base = float(B)
             Height = float(H)
             if(Base, Height > 0): 
@@ -247,213 +338,616 @@ def area_calc():
                 ShowResult(result)  
 
         #_____EXIT BUTTON______
-        back_button = Button(calc, text="EXIT", command=back, bg=matte_red, foreground="white", bd=4, activebackground="red")
-        back_button.place(x=455, y=318, height=27, width=87)
+        exit_button_T = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_T.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_T():
+            Height_label.destroy()
+            Height_textbox.destroy()
+            Base_label.destroy()
+            Base_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_T.destroy()
+            exit_button_T.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_T
+        back_button_T = Button(calc, text="BACK", command=back_T, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_T.place(x=100, y=318, height=27, width=87)
  
 
     #______________ShowResult Function________________
     def ShowResult(result):
-        lblResult = tk.Label(calc, text="Area =" + str(result))
+        global lblResult
+        lblResult = tk.Label(calc, text=f"Area ={str(result)} sq.units")
         lblResult.place(x=100, y=250)
 
 
     dropdown()
     calc.geometry("558x359")
 
-    
+
+
+
+
+
+
+
 #______VOLUME CALCULATOR______
 def volume_calc():
-    def destruction():          
-        cuboid_button.destroy()
-        cone_button.destroy()
-        sphere_button.destroy()
-        cylinder_button.destroy()
-    def cuboid():
-        destruction()
-        Label(calc,text="Enter Value of length").grid(row=0)
-        Label(calc,text="Enter Value of breadth").grid(row=1)
-        Label(calc,text="Enter Value of height").grid(row=2)
-        g=Entry(calc)
-        h=Entry(calc)
-        i=Entry(calc)
-        g.grid(row=0,column=1)
-        h.grid(row=1,column=1)
-        i.grid(row=2,column=1)
-        def calc1():
-            ganj.destroy()
-            j=g.get()
-            k=h.get()
-            l=i.get()
-            m=float(j)*float(k)*float(l)
-            z=Label(calc,text=f"{m} cubic units ")
-            z.grid(row=3,column=1)
-        ganj=Button(calc, text="Calculate", command=calc1)
-        ganj.grid(row=3, column=1)
-    def cone():
-        destruction()
-        Label(calc,text="Enter Value of radius").grid(row=0)
-        Label(calc,text="Enter Value of height").grid(row=1)
-        g=Entry(calc)
-        h=Entry(calc)
-        g.grid(row=0,column=1)
-        h.grid(row=1,column=1)
-        def calc1():
-            ganj.destroy()
-            pi=3.14
-            j=g.get()
-            k=h.get()
-            m=pi*float(j)**2*float(k)/3
-            z=Label(calc,text=f"{m} cubic units ")
-            z.grid(row=2,column=1)
-        ganj=Button(calc, text="Calculate", command=calc1)
-        ganj.grid(row=2, column=1)
+    def dropdown():
+        # Create and place a label for shape selection
+        global shape_label
+        shape_label = tk.Label(calc, text="Select Shape:", bg=black, foreground=text_colour, font=("Arial 12 bold"))
+        shape_label.place(x=32, y=138, height=42, width=112)
+
+        # Create a dropdown menu for shape selection
+        shapes = ["Sphere", "Cylinder", "Cone", "Cuboid"]
+        global shape_var
+        shape_var = tk.StringVar()
+        shape_var.set("Choose a shape")  # Default selection
+        global shape_menu
+        shape_menu = tk.OptionMenu(calc, shape_var, *shapes)
+        shape_menu.place(x=174, y=138, height=42, width=260)
+
+        # OK Button
+        global ok_button
+        ok_button = Button(calc, text="OK", command=OK_button, bg=matte_green, activebackground="green", bd=4)
+        ok_button.place(x=459, y=199, height=37, width=60)
+
+        #_____EXIT BUTTON______
+        global exit_button_V
+        exit_button_V = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_V.place(x=455, y=318, height=27, width=87)
+
+        #_____BACK BUTTON_______
+        global back_button_Op_V
+        back_button_Op_V = Button(calc, text="BACK", command=back_Op_V, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Op_V.place(x=100, y=318, height=27, width=87)
+
+    #_______BACK BUTTON TO OPTIONS SCREEN_______
+    def back_Op_V():
+        shape_label.destroy()
+        shape_menu.destroy()
+        ok_button.destroy()
+        back_button_Op_V.destroy()
+        exit_button_V.destroy()
+        calc.geometry("550x700")
+        options_screen()
+
+
+    #________OK BUTTON____________
+    def OK_button():
+
+        shape = shape_var.get()
+
+        if shape == "Sphere":
+            shape_menu.destroy()
+            shape_label.destroy()
+            ok_button.destroy()
+            back_button_Op_V.destroy()
+            exit_button_V.destroy()
+            sphere()
+            
+        elif shape == "Cylinder":
+            shape_menu.destroy()
+            shape_label.destroy()
+            ok_button.destroy()
+            back_button_Op_V.destroy()
+            exit_button_V.destroy()
+            cylinder()
+            
+        elif shape == "Cone":
+            shape_menu.destroy()
+            shape_label.destroy()
+            ok_button.destroy()
+            back_button_Op_V.destroy()
+            exit_button_V.destroy()
+            cone()
+        
+        elif shape == "Cuboid":
+            shape_menu.destroy()
+            shape_label.destroy()
+            ok_button.destroy()
+            back_button_Op_V.destroy()
+            exit_button_V.destroy()
+            cuboid()
+        else:
+            area = 0  # Default value for unknown shape
+     
+
+    # Create and place entry fields for shape parameters
+    #_______SPHERE_______
     def sphere():
-        destruction()
-        Label(calc,text="Enter Value of radius").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def calc1():
-            ganj.destroy()
-            pi=3.14
-            j=g.get()
-            m=4/3*pi*float(j)**3
-            z=Label(calc,text=f"{m} cubic units ")
-            z.grid(row=1,column=1)
-        ganj=Button(calc, text="Calculate", command=calc1)
-        ganj.grid(row=1, column=1)
+        Radius_label = tk.Label(calc, text="Radius: ")
+        Radius_label.place(x=100, y=100)
+
+        Radius_textbox = tk.Entry(calc)
+        Radius_textbox.insert(END, 0)
+        Radius_textbox.place(x=170, y=100)
+
+        #________CALCULATE BUTTON_______ 
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Sp_Calculate(Radius_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=150)
+
+        #___________Calculate Function__________
+        def Sp_Calculate(input):
+            area = float(input)
+            if(area > 0): 
+                result = 1.34 * pi * area ** 2
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        global exit_button_Sp
+        exit_button_Sp = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Sp.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Sp():
+            Radius_label.destroy()
+            Radius_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Sp.destroy()
+            exit_button_Sp.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Sp
+        back_button_Sp = Button(calc, text="BACK", command=back_Sp, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Sp.place(x=100, y=318, height=27, width=87)
+
+        
+
+    #_______CUBOID_______
+    def cuboid():
+        Length_label = tk.Label(calc, text="Length: ")
+        Length_label.place(x=100, y=100)
+
+        Length_textbox = tk.Entry(calc)
+        Length_textbox.insert(END, 0)
+        Length_textbox.place(x=170, y=100)
+
+        Width_label = tk.Label(calc, text="Breadth: ")
+        Width_label.place(x=100, y=150)
+
+        Width_textbox = tk.Entry(calc)
+        Width_textbox.insert(END, 0)
+        Width_textbox.place(x=170, y=150)
+
+        Height_label = tk.Label(calc, text="Breadth: ")
+        Height_label.place(x=100, y=200)
+
+        Height_textbox = tk.Entry(calc)
+        Height_textbox.insert(END, 0)
+        Height_textbox.place(x=170, y=200)
+
+        #________CALCULATE BUTTON_______
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Cb_Calculate(Length_textbox.get(), Width_textbox.get(), Height_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=280)
+
+        #___________Calculate Function_______________
+        def Cb_Calculate(L,B,H):
+            Length = float(L)
+            Breadth = float(B)
+            Height = float(H)
+            if(Length, Breadth > 0): 
+                result = Length * Breadth * Height
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        exit_button_Cb = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Cb.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Cb():
+            Length_label.destroy()
+            Length_textbox.destroy()
+            Width_label.destroy()
+            Width_textbox.destroy()
+            Height_label.destroy()
+            Height_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Cb.destroy()
+            exit_button_Cb.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Cb
+        back_button_Cb = Button(calc, text="BACK", command=back_Cb, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Cb.place(x=10, y=318, height=27, width=87)
+
+
+
+    #________CONE________
+    def cone():
+        Radius_label = tk.Label(calc, text="Base: ")
+        Radius_label.place(x=100, y=100)
+
+        Radius_textbox = tk.Entry(calc)
+        Radius_textbox.insert(END, 0)
+        Radius_textbox.place(x=170, y=100)
+
+        Height_label = tk.Label(calc, text="Height: ")
+        Height_label.place(x=100, y=150)
+
+        Height_textbox = tk.Entry(calc)
+        Height_textbox.insert(END, 0)
+        Height_textbox.place(x=170, y=150)
+
+        #________CALCULATE BUTTON_______
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Co_Calculate(Radius_textbox.get(), Height_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=200)
+
+        #___________Calculate Function_______________
+        def Co_Calculate(R,H):
+            Radius = float(R)
+            Height = float(H)
+            if(Radius, Height > 0): 
+                result = 0.34 * pi * Height * (Radius ** 2) 
+                ShowResult(result)  
+
+        #_____EXIT BUTTON______
+        exit_button_Co = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Co.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Co():
+            Height_label.destroy()
+            Height_textbox.destroy()
+            Radius_label.destroy()
+            Radius_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Co.destroy()
+            exit_button_Co.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Co
+        back_button_Co = Button(calc, text="BACK", command=back_Co, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Co.place(x=100, y=318, height=27, width=87)
+ 
+    #________CYLINDER________
     def cylinder():
-        destruction()
-        Label(calc,text="Enter Value of radius").grid(row=0)
-        Label(calc,text="Enter Value of height").grid(row=1)
-        g=Entry(calc)
-        h=Entry(calc)
-        g.grid(row=0,column=1)
-        h.grid(row=1,column=1)
-        def calc1():
-            ganj.destroy()
-            pi=3.14
-            j=g.get()
-            k=h.get()
-            m=pi*float(j)**2*float(k)
-            z=Label(calc,text=f"{m} cubic units ")
-            z.grid(row=2,column=1)
-        ganj=Button(calc, text="Calculate", command=calc1)
-        ganj.grid(row=2, column=1)
-    cuboid_button =  Button(calc, text="Cuboid", activebackground=matte_green, bg=grey, borderwidth=2, command=cuboid, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white", bd=3)
-    cuboid_button.place(x=100, y=100, width=350, height=100)
-    cone_button =  Button(calc, text="Cone", activebackground=matte_green, bg=grey, borderwidth=2, command=cone, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white", bd=3)
-    cone_button.place(x=100, y=250, width=350, height=100)
-    sphere_button =  Button(calc, text="Sphere", activebackground=matte_green, bg=grey, borderwidth=2, command=sphere, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white", bd=3)
-    sphere_button.place(x=100, y=400, width=350, height=100)
-    cylinder_button = Button(calc, text="Cylinder", activebackground=matte_green, bg=grey, borderwidth=2, command=cylinder, font=("Helvatica 25 bold"), activeforeground=matte_blue, foreground="white", bd=3)
-    cylinder_button.place(x=100,y=550, width=350, height=100) 
+        Radius_label = tk.Label(calc, text="Base: ")
+        Radius_label.place(x=100, y=100)
+
+        Radius_textbox = tk.Entry(calc)
+        Radius_textbox.insert(END, 0)
+        Radius_textbox.place(x=170, y=100)
+
+        Height_label = tk.Label(calc, text="Height: ")
+        Height_label.place(x=100, y=150)
+
+        Height_textbox = tk.Entry(calc)
+        Height_textbox.insert(END, 0)
+        Height_textbox.place(x=170, y=150)
+
+        #________CALCULATE BUTTON_______
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Cy_Calculate(Radius_textbox.get(), Height_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=200)
+
+        #___________Calculate Function_______________
+        def Cy_Calculate(R,H):
+            Radius = float(R)
+            Height = float(H)
+            if(Radius, Height > 0): 
+                result = pi * Height * (Radius ** 2) 
+                ShowResult(result)  
+
+        #_____EXIT BUTTON______
+        exit_button_Cy = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Cy.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Co():
+            Height_label.destroy()
+            Height_textbox.destroy()
+            Radius_label.destroy()
+            Radius_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Cy.destroy()
+            exit_button_Cy.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Cy
+        back_button_Cy = Button(calc, text="BACK", command=back_Co, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Cy.place(x=100, y=318, height=27, width=87)
+ 
+
+
+    #______________ShowResult Function________________
+    def ShowResult(result):
+        global lblResult
+        lblResult = tk.Label(calc, text=f"Area ={str(result)} sq.units")
+        lblResult.place(x=100, y=250)
+
+
+    dropdown()
+    calc.geometry("558x359")
+
+
+
+
 
 #_________UNIT CONVERTER_________
 def unit_calc():
-    def destruction():          
-        feet_metres.destroy()
-        metres_feet.destroy()
-        acres_km2.destroy()
-        km2_acres.destroy()
-        pounds_kgs.destroy()
-        kgs_pounds.destroy()
 
-    def feet():
-        destruction()
-        Label(calc,text="Enter Value in feet").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert1():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)/3.281
-            l=Label(calc,text=f"{k} metres ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert1)
-        ganj.grid(row=2, column=1)
+    def dropdown():
+        # Create and place a label for shape selection
+        global unit_label
+        unit_label = tk.Label(calc, text="Select Conversion:", bg=black, foreground=text_colour, font=("Arial 9 bold"))
+        unit_label.place(x=32, y=138, height=42, width=112)
+
+        # Create a dropdown menu for shape selection
+        unit = ["Feet to Meters", "Meters to Feet", "Pounds to Kilograms", "KGs to Pounds"]
+        global unit_var
+        unit_var = tk.StringVar()
+        unit_var.set("Choose a conversion")  # Default selection
+        global unit_menu
+        unit_menu = tk.OptionMenu(calc, unit_var, *unit)
+        unit_menu.place(x=174, y=138, height=42, width=260)
+
+        # OK Button
+        global ok_button
+        ok_button = Button(calc, text="OK", command=OK_button, bg=matte_green, foreground="white", activebackground="green", bd=4)
+        ok_button.place(x=459, y=199, height=37, width=60)
+
+        #_____EXIT BUTTON______
+        global exit_button_U
+        exit_button_U = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_U.place(x=455, y=318, height=27, width=87)
+
+        #_____BACK BUTTON_______
+        global back_button_un_cv_sc
+        back_button_un_cv_sc = Button(calc, text="BACK", command=back_Op_U, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_un_cv_sc.place(x=100, y=318, height=27, width=87)
+
+    #_______BACK BUTTON TO OPTIONS SCREEN_______
+    def back_Op_U():
+        unit_label.destroy()
+        unit_menu.destroy()
+        ok_button.destroy()
+        back_button_un_cv_sc.destroy()
+        exit_button_U.destroy()
+        calc.geometry("550x700")
+        options_screen()
 
 
-    def metres():
-        destruction()
-        Label(calc,text="Enter Value in metres").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert2():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)*3.281
-            l=Label(calc,text=f"{k} feet ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert2)
-        ganj.grid(row=2, column=1)
+    #________OK BUTTON____________
+    def OK_button():
 
-    def acres():
-        destruction()
-        Label(calc,text="Enter Value in acres").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert3():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)/247.1
-            l=Label(calc,text=f"{k} Sq. Kilometres ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert3)
-        ganj.grid(row=2, column=1)
+        unit = unit_var.get()
 
-    def km2():
-        destruction()
-        Label(calc,text="Enter Value in square kilometres").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert4():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)*247.1
-            l=Label(calc,text=f"{k} acres ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert4)
-        ganj.grid(row=2, column=1)
+        if unit == "Feet to Meters":
+            unit_menu.destroy()
+            unit_label.destroy()
+            ok_button.destroy()
+            back_button_un_cv_sc.destroy()
+            exit_button_U.destroy()
+            Ft_Mt()
+            
+        elif unit == "Meters to Feet":
+            unit_menu.destroy()
+            unit_label.destroy()
+            ok_button.destroy()
+            back_button_un_cv_sc.destroy()
+            exit_button_U.destroy()
+            Mt_Ft()
 
-    def pounds():
-        destruction()
-        Label(calc,text="Enter Value in pounds").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert5():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)/2.205
-            l=Label(calc,text=f"{k} Kgs ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert5)
-        ganj.grid(row=2, column=1)
+        elif unit == "Pounds to Kilograms":
+            unit_menu.destroy()
+            unit_label.destroy()
+            ok_button.destroy()
+            back_button_un_cv_sc.destroy()
+            exit_button_U.destroy()
+            Pd_Kg()
 
-    def kgs():
-        destruction()
-        Label(calc,text="Enter Value in kgs").grid(row=0)
-        g=Entry(calc)
-        g.grid(row=0,column=1)
-        def convert6():
-            ganj.destroy()
-            h=g.get()
-            k=float(h)*2.205
-            l=Label(calc,text=f"{k} Pounds ")
-            l.grid(row=1,column=0)
-        ganj=Button(calc, text="Convert", command=convert6)
-        ganj.grid(row=2, column=1)
-    feet_metres =  Button(calc, text="Feet to Metres", activebackground=matte_green, bg=grey, borderwidth=2, command=feet, font=("Helvatica 15 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    feet_metres.place(x=150, y=100, width=250, height=50)
-    metres_feet =  Button(calc, text="Metres to Feet", activebackground=matte_green, bg=grey, borderwidth=2, command=metres, font=("Helvatica 15 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    metres_feet.place(x=150, y=200, width=250, height=50)
-    acres_km2 = Button(calc, text="Acres to Sq.Kilometre", activebackground=matte_green, bg=grey, borderwidth=2, command=acres, font=("Helvatica 12 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    acres_km2.place(x=150,y=300, width=250, height=50)
-    km2_acres =  Button(calc, text="Sq.Kilometres to Acres", activebackground=matte_green, bg=grey, borderwidth=2, command=km2, font=("Helvatica 12 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    km2_acres.place(x=150, y=400, width=250, height=50)
-    pounds_kgs =  Button(calc, text="Pounds to KGs", activebackground=matte_green, bg=grey, borderwidth=2, command=pounds, font=("Helvatica 15 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    pounds_kgs.place(x=150, y=500, width=250, height=50)
-    kgs_pounds = Button(calc, text="KGs to Pounds", activebackground=matte_green, bg=grey, borderwidth=2, command=kgs, font=("Helvatica 15 bold"), activeforeground=matte_blue, foreground="white", bd=4)
-    kgs_pounds.place(x=150,y=600, width=250, height=50)
+        elif unit == "KGs to Pounds":
+            unit_menu.destroy()
+            unit_label.destroy()
+            ok_button.destroy()
+            back_button_un_cv_sc.destroy()
+            exit_button_U.destroy()
+            Kg_Pd()
+
+        else:
+            area = 0  # Default value for unknown unit
+     
+
+    # Create and place entry fields for unit parameters
+    #_______FEET TO METERS_______
+    def Ft_Mt():
+        Feet_label = tk.Label(calc, text="Enter value in Feet: ")
+        Feet_label.place(x=100, y=100)
+
+        Feet_textbox = tk.Entry(calc)
+        Feet_textbox.insert(END, 0)
+        Feet_textbox.place(x=240, y=100)
+
+        #________CALCULATE BUTTON_______ 
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Ft_Mt_Calculate(Feet_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=150)
+
+        global M 
+        M = "Meters"
+
+        #___________Calculate Function__________
+        def Ft_Mt_Calculate(input):
+            area = float(input)
+            if(area > 0): 
+                result = area / 3.281
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        exit_button_Ft_Mt = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Ft_Mt.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Ft_Mt():
+            Feet_label.destroy()
+            Feet_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Ft_Mt.destroy()
+            exit_button_Ft_Mt.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Ft_Mt
+        back_button_Ft_Mt = Button(calc, text="BACK", command=back_Ft_Mt, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Ft_Mt.place(x=100, y=318, height=27, width=87)
+
+    
+
+    #_______METERS TO FEET_______
+    def Mt_Ft():
+        Meters_label = tk.Label(calc, text="Enter value in Meters: ")
+        Meters_label.place(x=100, y=100)
+
+        Meters_textbox = tk.Entry(calc)
+        Meters_textbox.insert(END, 0)
+        Meters_textbox.place(x=260, y=100)
+
+        #________CALCULATE BUTTON_______ 
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Mt_Ft_Calculate(Meters_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=150)
+
+        global M 
+        M = "Feet"
+
+        #___________Calculate Function__________
+        def Mt_Ft_Calculate(input):
+            area = float(input)
+            if(area > 0): 
+                result = area * 3.281
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        exit_button_Mt_Ft = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Mt_Ft.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Mt_Ft():
+            Meters_label.destroy()
+            Meters_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Mt_Ft.destroy()
+            exit_button_Mt_Ft.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Mt_Ft
+        back_button_Mt_Ft = Button(calc, text="BACK", command=back_Mt_Ft, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Mt_Ft.place(x=100, y=318, height=27, width=87)
+
+
+    #_______POUNDS TO KILOGRAMS_______
+    def Pd_Kg():
+        Pounds_label = tk.Label(calc, text="Enter value in Pounds: ")
+        Pounds_label.place(x=100, y=100)
+
+        Pounds_textbox = tk.Entry(calc)
+        Pounds_textbox.insert(END, 0)
+        Pounds_textbox.place(x=260, y=100)
+
+        #________CALCULATE BUTTON_______ 
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Pd_Kg_Calculate(Pounds_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=150)
+
+        global M 
+        M = "KGs"
+
+        #___________Calculate Function__________
+        def Pd_Kg_Calculate(input):
+            area = float(input)
+            if(area > 0): 
+                result = area / 2.205
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        exit_button_Pd_Kg = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Pd_Kg.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Pd_Kg():
+            Pounds_label.destroy()
+            Pounds_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Pd_Kg.destroy()
+            exit_button_Pd_Kg.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Pd_Kg
+        back_button_Pd_Kg = Button(calc, text="BACK", command=back_Pd_Kg, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Pd_Kg.place(x=100, y=318, height=27, width=87)
+        
+
+    #_______KILOGRAMS TO POUNDS_______
+    def Kg_Pd():
+        Kilograms_label = tk.Label(calc, text="Enter value in Kilograms: ")
+        Kilograms_label.place(x=100, y=100)
+
+        Kilograms_textbox = tk.Entry(calc)
+        Kilograms_textbox.insert(END, 0)
+        Kilograms_textbox.place(x=275, y=100)
+
+        #________CALCULATE BUTTON_______ 
+        Calculate_button = tk.Button(calc, text="Calculate", command= lambda: Kg_Pd_Calculate(Kilograms_textbox.get()), activebackground="green", bd=3, bg=matte_green, foreground="white")
+        Calculate_button.place(x=100, y=150)
+
+        global M 
+        M = "Pounds"
+
+        #___________Calculate Function__________
+        def Kg_Pd_Calculate(input):
+            area = float(input)
+            if(area > 0): 
+                result = area * 2.205
+                ShowResult(result)   
+
+        #_____EXIT BUTTON______
+        exit_button_Kg_Pd = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
+        exit_button_Kg_Pd.place(x=455, y=318, height=27, width=87)
+
+        #_______BACK BUTTON TO OPTIONS SCREEN_______
+        def back_Kg_Pd():
+            Kilograms_label.destroy()
+            Kilograms_textbox.destroy()
+            Calculate_button.destroy()
+            back_button_Kg_Pd.destroy()
+            exit_button_Kg_Pd.destroy()
+            lblResult.destroy()
+            dropdown()
+        
+        #_____BACK BUTTON_______
+        global back_button_Kg_Pd
+        back_button_Kg_Pd = Button(calc, text="BACK", command=back_Kg_Pd, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
+        back_button_Kg_Pd.place(x=100, y=318, height=27, width=87)
+
+    
+ 
+
+    #______________ShowResult Function________________
+    def ShowResult(result):
+        global lblResult
+        lblResult = tk.Label(calc, text=f"{str(result)} {M}")
+        lblResult.place(x=100, y=250)
+
+
+    dropdown()
+    calc.geometry("558x359")
+
 
 options_screen()
 calc.mainloop()
