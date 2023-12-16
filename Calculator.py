@@ -247,7 +247,8 @@ def area_calc():
             Calculate_button.destroy()
             back_button_Cr.destroy()
             exit_button_Cr.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -299,7 +300,8 @@ def area_calc():
             Calculate_button.destroy()
             back_button_R.destroy()
             exit_button_R.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -350,21 +352,13 @@ def area_calc():
             Calculate_button.destroy()
             back_button_T.destroy()
             exit_button_T.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
             dropdown()
         
         #_____BACK BUTTON_______
         global back_button_T
         back_button_T = Button(calc, text="BACK", command=back_T, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
         back_button_T.place(x=100, y=318, height=27, width=87)
- 
-
-    #______________ShowResult Function________________
-    def ShowResult(result):
-        global lblResult
-        lblResult = tk.Label(calc, text=f"Area ={str(result)} sq.units")
-        lblResult.place(x=100, y=250)
-
 
     dropdown()
     calc.geometry("558x359")
@@ -492,7 +486,8 @@ def volume_calc():
             Calculate_button.destroy()
             back_button_Sp.destroy()
             exit_button_Sp.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -553,7 +548,8 @@ def volume_calc():
             Calculate_button.destroy()
             back_button_Cb.destroy()
             exit_button_Cb.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -604,7 +600,8 @@ def volume_calc():
             Calculate_button.destroy()
             back_button_Co.destroy()
             exit_button_Co.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -653,22 +650,14 @@ def volume_calc():
             Calculate_button.destroy()
             back_button_Cy.destroy()
             exit_button_Cy.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
         global back_button_Cy
         back_button_Cy = Button(calc, text="BACK", command=back_Co, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
         back_button_Cy.place(x=100, y=318, height=27, width=87)
- 
-
-
-    #______________ShowResult Function________________
-    def ShowResult(result):
-        global lblResult
-        lblResult = tk.Label(calc, text=f"Area ={str(result)} sq.units")
-        lblResult.place(x=100, y=250)
-
 
     dropdown()
     calc.geometry("558x359")
@@ -797,7 +786,8 @@ def unit_calc():
             Calculate_button.destroy()
             back_button_Ft_Mt.destroy()
             exit_button_Ft_Mt.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -841,7 +831,8 @@ def unit_calc():
             Calculate_button.destroy()
             back_button_Mt_Ft.destroy()
             exit_button_Mt_Ft.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -884,7 +875,8 @@ def unit_calc():
             Calculate_button.destroy()
             back_button_Pd_Kg.destroy()
             exit_button_Pd_Kg.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -927,7 +919,8 @@ def unit_calc():
             Calculate_button.destroy()
             back_button_Kg_Pd.destroy()
             exit_button_Kg_Pd.destroy()
-            lblResult.destroy()
+            lblResult.config(text="", bg=black, borderwidth=0, highlightthickness=0)
+
             dropdown()
         
         #_____BACK BUTTON_______
@@ -935,19 +928,14 @@ def unit_calc():
         back_button_Kg_Pd = Button(calc, text="BACK", command=back_Kg_Pd, bg=matte_orange, foreground="white", bd=4, activebackground="orange")
         back_button_Kg_Pd.place(x=100, y=318, height=27, width=87)
 
-    
- 
-
-    #______________ShowResult Function________________
-    def ShowResult(result):
-        global lblResult
-        lblResult = tk.Label(calc, text=f"{str(result)} {M}")
-        lblResult.place(x=100, y=250)
-
-
     dropdown()
     calc.geometry("558x359")
 
+def ShowResult(result):
+    lblResult.config(text=f"Area ={str(result)} sq.units", background=cool_white)
 
+lblResult = tk.Label(calc, background=black)
+lblResult.place(x=100, y=250)
+    
 options_screen()
 calc.mainloop()
