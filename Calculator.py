@@ -478,7 +478,7 @@ def volume_calc():
             area = float(input)
             if(area > 0): 
                 result = 1.34 * pi * area ** 2
-                ShowResult(result)   
+                ShowResult_V(result)   
 
         #_____EXIT BUTTON______
         global exit_button_Sp
@@ -519,7 +519,7 @@ def volume_calc():
         Width_textbox.insert(END, 0)
         Width_textbox.place(x=170, y=150)
 
-        Height_label = tk.Label(calc, text="Breadth: ")
+        Height_label = tk.Label(calc, text="Height: ")
         Height_label.place(x=100, y=200)
 
         Height_textbox = tk.Entry(calc)
@@ -537,7 +537,7 @@ def volume_calc():
             Height = float(H)
             if(Length, Breadth > 0): 
                 result = Length * Breadth * Height
-                ShowResult(result)   
+                ShowResult_V(result)   
 
         #_____EXIT BUTTON______
         exit_button_Cb = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -591,7 +591,7 @@ def volume_calc():
             Height = float(H)
             if(Radius, Height > 0): 
                 result = 0.34 * pi * Height * (Radius ** 2) 
-                ShowResult(result)  
+                ShowResult_V(result)  
 
         #_____EXIT BUTTON______
         exit_button_Co = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -641,7 +641,7 @@ def volume_calc():
             Height = float(H)
             if(Radius, Height > 0): 
                 result = pi * Height * (Radius ** 2) 
-                ShowResult(result)  
+                ShowResult_V(result)  
 
         #_____EXIT BUTTON______
         exit_button_Cy = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -779,7 +779,7 @@ def unit_calc():
             area = float(input)
             if(area > 0): 
                 result = area / 3.281
-                ShowResult(result)   
+                ShowResult_Ft_Mt(result)   
 
         #_____EXIT BUTTON______
         exit_button_Ft_Mt = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -824,7 +824,7 @@ def unit_calc():
             area = float(input)
             if(area > 0): 
                 result = area * 3.281
-                ShowResult(result)   
+                ShowResult_Mt_Ft(result)   
 
         #_____EXIT BUTTON______
         exit_button_Mt_Ft = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -868,7 +868,7 @@ def unit_calc():
             area = float(input)
             if(area > 0): 
                 result = area / 2.205
-                ShowResult(result)   
+                ShowResult_Pd_Kg(result)   
 
         #_____EXIT BUTTON______
         exit_button_Pd_Kg = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -912,7 +912,7 @@ def unit_calc():
             area = float(input)
             if(area > 0): 
                 result = area * 2.205
-                ShowResult(result)   
+                ShowResult_Kg_Pd(result)   
 
         #_____EXIT BUTTON______
         exit_button_Kg_Pd = Button(calc, text="EXIT", command=exit, bg=matte_red, foreground="white", bd=4, activebackground="red")
@@ -941,6 +941,23 @@ def unit_calc():
 #____SHOW RESULT FUNCTION______
 def ShowResult(result):
     lblResult.config(text=f"Area ={str(result)} sq.units", background=cool_white)
+
+def ShowResult_V(result):
+    lblResult.config(text=f"Volume ={str(result)} cubic.units", background=cool_white)
+
+def ShowResult_Ft_Mt(result):
+    lblResult.config(text=f"{str(result)} Meters", background=cool_white)
+
+def ShowResult_Mt_Ft(result):
+    lblResult.config(text=f"{str(result)} Feet", background=cool_white)
+
+def ShowResult_Pd_Kg(result):
+    lblResult.config(text=f"{str(result)} KGs", background=cool_white)
+
+def ShowResult_Kg_Pd(result):
+    lblResult.config(text=f"{str(result)} Pounds", background=cool_white)
+
+
 
 #_______RESULT LABEL_______
 lblResult = tk.Label(calc, background=black)
