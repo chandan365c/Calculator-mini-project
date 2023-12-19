@@ -237,7 +237,10 @@ def area_calc():
 
         #___________Calculate Function__________
         def C_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = pi * area ** 2
                 ShowResult(result)   
@@ -287,8 +290,11 @@ def area_calc():
 
         #___________Calculate Function_______________
         def R_Calculate(L,B):
-            Length = float(L)
-            Breadth = float(B)
+            try:
+                Length = float(L)
+                Breadth = float(B)
+            except ValueError:
+                ShowResult_Error()
             if(Length, Breadth > 0): 
                 result = Length * Breadth
                 ShowResult(result)   
@@ -339,8 +345,11 @@ def area_calc():
 
         #___________Calculate Function_______________
         def T_Calculate(B,H):
-            Base = float(B)
-            Height = float(H)
+            try:
+                Base = float(B)
+                Height = float(H)
+            except ValueError:
+                ShowResult_Error()
             if(Base, Height > 0): 
                 result = 0.5 * Base * Height
                 ShowResult(result)  
@@ -475,7 +484,10 @@ def volume_calc():
 
         #___________Calculate Function__________
         def Sp_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = 1.34 * pi * area ** 2
                 ShowResult_V(result)   
@@ -532,9 +544,12 @@ def volume_calc():
 
         #___________Calculate Function_______________
         def Cb_Calculate(L,B,H):
-            Length = float(L)
-            Breadth = float(B)
-            Height = float(H)
+            try:
+                Length = float(L)
+                Breadth = float(B)
+                Height = float(H)
+            except:
+                ShowResult_Error()
             if(Length, Breadth > 0): 
                 result = Length * Breadth * Height
                 ShowResult_V(result)   
@@ -587,8 +602,11 @@ def volume_calc():
 
         #___________Calculate Function_______________
         def Co_Calculate(R,H):
-            Radius = float(R)
-            Height = float(H)
+            try:
+                Radius = float(R)
+                Height = float(H)
+            except ValueError:
+                ShowResult_Error()
             if(Radius, Height > 0): 
                 result = 0.34 * pi * Height * (Radius ** 2) 
                 ShowResult_V(result)  
@@ -637,8 +655,11 @@ def volume_calc():
 
         #___________Calculate Function_______________
         def Cy_Calculate(R,H):
-            Radius = float(R)
-            Height = float(H)
+            try:
+                Radius = float(R)
+                Height = float(H)
+            except ValueError:
+                ShowResult_Error()
             if(Radius, Height > 0): 
                 result = pi * Height * (Radius ** 2) 
                 ShowResult_V(result)  
@@ -776,7 +797,10 @@ def unit_calc():
 
         #___________Calculate Function__________
         def Ft_Mt_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = area / 3.281
                 ShowResult_Ft_Mt(result)   
@@ -821,7 +845,10 @@ def unit_calc():
 
         #___________Calculate Function__________
         def Mt_Ft_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = area * 3.281
                 ShowResult_Mt_Ft(result)   
@@ -865,7 +892,10 @@ def unit_calc():
 
         #___________Calculate Function__________
         def Pd_Kg_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = area / 2.205
                 ShowResult_Pd_Kg(result)   
@@ -909,7 +939,10 @@ def unit_calc():
 
         #___________Calculate Function__________
         def Kg_Pd_Calculate(input):
-            area = float(input)
+            try:
+                area = float(input)
+            except ValueError:
+                ShowResult_Error()
             if(area > 0): 
                 result = area * 2.205
                 ShowResult_Kg_Pd(result)   
@@ -956,6 +989,9 @@ def ShowResult_Pd_Kg(result):
 
 def ShowResult_Kg_Pd(result):
     lblResult.config(text=f"{str(result)} Pounds", background=cool_white)
+
+def ShowResult_Error():
+    lblResult.config(text="Please Enter an integer value", background=cool_white)
 
 
 
